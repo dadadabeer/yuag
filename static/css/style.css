@@ -1,1 +1,75 @@
+/* Table styles */
+table {
+    width: 100%;
+    margin-top: 20px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
 
+th, td {
+    padding: 5px 5px;
+    border: 1px solid #eee;
+    text-align: left;
+}
+
+thead {
+    background-color: #f5f5f5;
+}
+
+th {
+    font-weight: bold;
+}
+
+/* Table row hover styles */
+tbody tr:hover {
+    background-color: lightgray;
+}
+
+/* Object Label section */
+.label-section {
+    margin-top: 20px;
+}
+
+.label-content {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Produced By section */
+.produced-by-table {
+    margin-top: 20px;
+}
+
+.nationalities-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.nationality-item {
+    color: #444;
+}
+
+/* Classified As section */
+.classified-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.classifier-item {
+    margin-bottom: 10px;
+}
+
+/* References section */
+.references-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.reference-item {
+    margin-bottom: 10px;
+}
+
+.reference-title {
+    font-weight: bold;
+}
