@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yale University Art Gallery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+</head>
+
+<body>
+    <div class="detail-container">
+
+        <!-- <h1>Object {{ obj_id }}</h1> -->
+
+        <section>
+            <h2>Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Accession no.</th>
+                        <th>Date</th>
+                        <th>Place</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ obj.get_acc_no()|safe }}</td>
+                        <td>{{ obj.get_date()|safe }}</td>
+                        <td>{{ obj.get_place()|safe }}</td>
+                        <td>{{ obj.get_dept()|safe }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="label-section">
+            <h2>Object Label:</h2>
+            <span class="label-content">{{ obj.get_label()|safe }}</span>
+        </div>
+
+        <section class="produced-by-section">
+            <h2 class="produced-by-heading">Produced By</h2>
+            <table class="produced-by-table">
+                <thead class="table-header">
+                    <tr class="header-row">
+                        <th class="header-part">Part</th>
+                        <th class="header-name">Name</th>
+                        <th class="header-nationalities">Nationalities</th>
+                        <th class="header-timespan">Timespan</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    {% for part, name, nationalities, timespan in obj.get_productions() %}
+                    <tr class="data-row">
+                        <td class="data-part">{{ part|safe }}</td>
+                        <td class="data-name">{{ name|safe }}</td>
+                        <td class="data-nationalities">{{ nationalities|safe }}</td>
+                        <td class="data-timespan">{{ timespan|safe }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        {% if obj.has_image() %}
+        <div id="image">
+            <h2>Image</h2>
+            <img src="https://media.collections.yale.edu/thumbnail/yuag/obj/{{ obj_id }}">
+        </div>
+        {% endif %}
+
+        <section class="classified-section">
+            <h2 class="classified-heading">Classified As</h2>
+            <ul class="classified-list">
+                {% for classifier in obj.get_classifiers() %}
+                <li class="classifier-item">{{ classifier|safe }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2 class="references-heading">References</h2>
+            <ul class="references-list">
+                {% for title, description in obj.get_references() %}
+                <li class="reference-item">
+                    <span class="reference-title">{{ title|safe }}</span>:
+                    <span class="reference-description">{{ description|safe }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        
+        <!-- <a href="{{ url_for('search_results') }}">Back to Search Page</a> -->
+
+    </div>
+</body>
+
+</html>

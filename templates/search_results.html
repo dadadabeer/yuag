@@ -1,0 +1,40 @@
+<div class="results-container">
+    {% if objects %}
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Date</th>
+                    <th>Agents</th>
+                    <th>Classified As</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in objects %}
+                <tr>
+                    <td class="label-cell">
+                        <h2><a href="{{ url_for('get_object_deets', obj_id=obj.get_id()) }}" target="_blank">{{ obj.get_label() }}</a></h2>
+                    </td>
+                    <td>{{ obj.get_date() }}</td>
+                    <td>
+                        <ul class="list-style">
+                            {% for agent in obj.get_agents() %}
+                                <li>{{ agent }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-style">
+                            {% for classifier in obj.get_classifiers() %}
+                                <li>{{ classifier.lstrip(', ') }}</li>
+                            {% endfor %}
+                        </ul>                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-results">{{error_message}}</p>
+    {% endif %}
+</div>
